@@ -5,10 +5,8 @@ import android.os.Bundle
 import android.speech.tts.TextToSpeech
 import android.speech.tts.UtteranceProgressListener
 import android.speech.tts.Voice
-import android.util.Log
 import android.view.View
 import android.widget.*
-import com.google.android.material.snackbar.Snackbar
 import java.util.*
 
 class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener, AdapterView.OnItemSelectedListener {
@@ -27,7 +25,7 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener, AdapterVi
         val sharedPref = getSharedPreferences(getString(R.string.preference_file_key), MODE_PRIVATE) ?: return
         sharedPref.getInt(getString(R.string.preference_selected), 0).also {
             selectedVoice = it
-        Log.d("test", "$it")}
+        }
 
 
         textEdit = findViewById<TextView>(R.id.textEdit)
@@ -111,17 +109,14 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener, AdapterVi
     }
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-        println("I am selected")
 
         val sharedPref = getSharedPreferences(getString(R.string.preference_file_key), MODE_PRIVATE) ?: return
         with (sharedPref.edit()) {
             putInt(getString(R.string.preference_selected), position)
             apply()
-            Log.d("debugging", "I think so")
         }
 
         val test = sharedPref.getInt(getString(R.string.preference_selected), 0)
-        Log.d("debuggin", "$test")
         selectedVoice = position
     }
 
