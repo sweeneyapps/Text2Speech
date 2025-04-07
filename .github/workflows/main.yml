@@ -1,0 +1,25 @@
+name: Test Run
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+          check-latest: true
+      - name: First Run
+        run: |
+          node -v
+          echo "CPU Cores:"
+          nproc
+          echo "Memory Usage:"
+          free -h
+    
